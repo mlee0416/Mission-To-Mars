@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+      crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href='{{ url_for("static", filename="style.css") }}' />
+    <title>Mission to Mars</title>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <a class="navbar-brand" href="#">Home</a>
+        </div>
+      </nav>
+      <div class="jumbotron jumbotron-fluid">
+        <div id="jumbo-container" class="container">
+          <h1 id="jumbotron-title" class="display-4">Mission to Mars</h1>
+          <br>
+          <a href="/scrape">
+            <button type="button" id="scrape-btn" class="btn btn-outline-light">
+              <strong>Scrape New Data</strong>
+            </button>
+          </a>
+          <br>
+          <div class="progress centered" style="visibility: hidden;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-md-12">
+            <h3>Latest Mars News</h3>
+            <h5>{{ mars.news_title }}</h5>
+            <p>{{ mars.news_p }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-lg-8">
+            <h3>Featured Mars Image</h3>
+            <img src="{{ mars.featured_img_url }}" id="feat-img" class="img-fluid centered" alt="Featured Image" />
+          </div>
+          <div class="col-xs-12 col-lg-4" id="aside">
+            <div class="col-xs-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Current Weather on Mars</h5>
+                  <p class="card-text">{{ mars.mars_weather_tweet }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12" id="mars-facts-table">
+              <h5 id="mars-facts-title">Mars Facts</h5>
+              {{ mars.html_table|safe }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div id="hemis-title" class="col-xs-12 centered">
+            <h3>Mars Hemispheres</h3>
+          </div>
+        </div>
+        <hr>
+        <!-- Could add a for loop to render hemis imgs -->
+        <div class="row">
+          <div class="col-xs-12 col-lg-6">
+            <figure class="figure">
+              <img src="{{ mars.hemisphere_image_urls[0].image_url }}" class="figure-img img-fluid rounded" alt="{{ mars.hemisphere_image_urls[0].title }}">
+              <figcaption class="figure-caption">&mdash; {{ mars.hemisphere_image_urls[0].title }}</figcaption>
+            </figure>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <figure class="figure">
+              <img src="{{ mars.hemisphere_image_urls[1].image_url }}" class="figure-img img-fluid rounded" alt="{{ mars.hemisphere_image_urls[1].title }}">
+              <figcaption class="figure-caption">&mdash; {{ mars.hemisphere_image_urls[1].title }}</figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-lg-6">
+            <figure class="figure">
+              <img src="{{ mars.hemisphere_image_urls[2].image_url }}" class="figure-img img-fluid rounded" alt="{{ mars.hemisphere_image_urls[2].title }}">
+              <figcaption class="figure-caption">&mdash; {{ mars.hemisphere_image_urls[2].title }}</figcaption>
+            </figure>
+          </div>
+          <div class="col-xs-12 col-lg-6">
+            <figure class="figure">
+              <img src="{{ mars.hemisphere_image_urls[3].image_url }}" class="figure-img img-fluid rounded" alt="{{ mars.hemisphere_image_urls[3].title }}">
+              <figcaption class="figure-caption">&mdash; {{ mars.hemisphere_image_urls[3].title }}</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.7.3/d3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+      crossorigin="anonymous"></script>
+    <script src="{{ url_for('static',filename='index.js') }}"></script>
+  </body>
+
+</html>
